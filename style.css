@@ -1,0 +1,119 @@
+/* ---------- Reset & base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --bg-deep:#050b1f;
+  --bg-mid:#13294f;
+  --accent:#7fffd4;
+  --text:#f8fbff;
+}
+html,body { height: 100%; }
+body{
+  font-family: "Playfair Display", Georgia, serif;
+  background: radial-gradient(circle at 40% 20%, var(--bg-mid) 0%, var(--bg-deep) 60%);
+  color: var(--text);
+  overflow: hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ---------- Background layers (behind content) ---------- */
+#bg-root { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+/* soft ambient glow */
+.ambient {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(120,150,255,0.14), transparent 50%);
+  filter: blur(18px); opacity: 0.9;
+}
+
+/* subtle star texture */
+.starfield {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.95) 1px, transparent 1px);
+  background-size: 4px 4px; opacity: 0.035;
+}
+
+/* container for all JS-inserted effects */
+.effects { position: absolute; inset: 0; }
+
+/* ---------- content layers ---------- */
+main#landing, section#experience {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column; justify-content:center; align-items:center;
+  text-align:center;
+  z-index: 10; /* content above background */
+  transition: opacity 1.0s ease;
+}
+
+/* Landing */
+main#landing { gap: 28px; }
+.brand { font-size: 4.2rem; letter-spacing: 4px; text-shadow: 0 0 20px rgba(120,150,255,0.12); }
+.cta {
+  padding: 12px 36px; border-radius:8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text); cursor: pointer; font-size:1rem;
+  transition: transform .18s ease, box-shadow .25s ease;
+}
+.cta:active { transform: translateY(1px); }
+.cta:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+
+/* Experience */
+#experience.hidden { opacity: 0; pointer-events: none; }
+#experience { opacity: 0; pointer-events: none; }
+#experience.active { opacity: 1; pointer-events: auto; }
+
+/* hero */
+.age { font-size: 4.6rem; margin-bottom: 6px; text-shadow: 0 0 26px rgba(120,180,255,0.12); font-weight:600; }
+.subtitle { font-size: 1.05rem; margin-bottom: 22px; opacity:0.95; }
+
+/* poem — medium size so it fits nicely */
+.poem {
+  width: min(760px, 92vw);
+  margin-top: 6px;
+  padding: 18px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+}
+.poem p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 10px 0;
+  color: var(--text);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1.1s ease, transform 1.1s ease;
+}
+.poem p.show { opacity: 1; transform: translateY(0); }
+
+/* sparkles (small dot) */
+.sparkle {
+  position: absolute; border-radius: 50%;
+  width: 4px; height: 4px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent), 0 0 22px rgba(127,255,212,0.28);
+  opacity: 0; transition: opacity 1s linear;
+  pointer-events: none;
+}
+
+/* meteor pieces (tail + head) */
+.meteor { position: absolute; pointer-events:none; opacity: 1; }
+.meteor .tail {
+  position: absolute; left:0; top:0;
+  width: 360px; height: 3px;
+  background: linear-gradient(90deg, rgba(127,255,212,0.9), rgba(127,255,212,0.35), rgba(127,255,212,0.08), transparent);
+  filter: blur(0.6px); border-radius: 4px;
+}
+.meteor .head {
+  position: absolute; width:10px; height:10px; border-radius:50%;
+  background: white; left: 340px; top: -4px;
+  box-shadow: 0 0 12px white, 0 0 28px rgba(127,255,212,0.9);
+}
+
+/* small-screen adjustments */
+@media (max-width:640px){
+  .brand { font-size: 2.8rem; }
+  .age { font-size: 3.2rem; }
+  .poem p { font-size: 16px; line-height:1.5; }
+  .meteor .tail { width: 220px; }
+}

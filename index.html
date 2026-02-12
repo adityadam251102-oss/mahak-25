@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mahak — 25</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background root: strictly pointer-events:none -->
+  <div id="bg-root" aria-hidden="true">
+    <div class="ambient"></div>
+    <div class="starfield"></div>
+    <div class="effects"></div> <!-- JS will append sparkles/meteors here -->
+  </div>
+
+  <!-- Landing (on top) -->
+  <main id="landing" role="main" aria-label="landing">
+    <h1 class="brand">Mahak</h1>
+    <button id="beginBtn" class="cta">Begin</button>
+  </main>
+
+  <!-- Experience (hidden until start) -->
+  <section id="experience" class="hidden" aria-label="experience">
+    <header class="hero">
+      <div class="age">25</div>
+      <div class="subtitle">Happy Birthday, Mahak.</div>
+    </header>
+
+    <article class="poem" aria-label="poem">
+      <p>Twenty-five — a quiet turning.</p>
+      <p>You have grown with gentle courage.</p>
+      <p>Small kindnesses have become your signature.</p>
+      <p>May this year bring steady light and close comforts.</p>
+      <p>May your days feel like music you want to keep.</p>
+      <p>Happy 25th, Mahak.</p>
+    </article>
+  </section>
+
+  <!-- Put your piano mp3 named exactly music.mp3 in same folder -->
+  <audio id="bgMusic" preload="auto" src="music.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
